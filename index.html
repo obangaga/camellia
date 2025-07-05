@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kasir Toko Roti Bro - Dengan Kategori</title>
+    <title>Kasir Toko Roti Bro - 6 Kategori</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -25,6 +25,7 @@
             --coffee: #8e44ad;
             --pemanas: #e74c3c;
             --pendingin: #2ecc71;
+            --kulkas: #1e3799;
         }
 
         body {
@@ -176,6 +177,11 @@
             color: white;
         }
 
+        .category-kulkas {
+            background: var(--kulkas);
+            color: white;
+        }
+
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -226,6 +232,10 @@
 
         .product-pendingin .product-image {
             background: linear-gradient(45deg, #a1c4fd, #c2e9fb);
+        }
+
+        .product-kulkas .product-image {
+            background: linear-gradient(45deg, #4a69bd, #6a89cc);
         }
 
         .product-info {
@@ -528,8 +538,8 @@
             <div class="logo">
                 <i class="fas fa-bread-slice"></i>
                 <div>
-                    <h1>Kasir Toko Roti Bro</h1>
-                    <div class="subtitle">Sistem kasir modern dengan kategori produk</div>
+                    <h1>CAMELLIA COFFEE & BAKERY</h1>
+                    <div class="subtitle">Contoh Bae Ndisitt</div>
                 </div>
             </div>
         </header>
@@ -554,6 +564,9 @@
                     </button>
                     <button class="category-btn category-pendingin" data-category="Pendingin">
                         <i class="fas fa-snowflake"></i> Pendingin
+                    </button>
+                    <button class="category-btn category-kulkas" data-category="Kulkas">
+                        <i class="fas fa-thermometer-full"></i> Kulkas
                     </button>
                 </div>
                 
@@ -658,37 +671,43 @@
     <div class="notification" id="notification">Transaksi berhasil diselesaikan!</div>
     
     <script>
-        // Data produk dengan kategori
+        // Data produk dengan kategori - semua diurutkan berdasarkan abjad
         const products = [
-            // Kategori Roti
-            { id: 1, name: "Roti Coklat", price: 10000, icon: "fas fa-cookie", category: "Roti" },
+            // Kategori Roti (diurutkan A-Z)
+            { id: 3, name: "Bagel Coklat", price: 12000, icon: "fas fa-bread-slice", category: "Roti" },
             { id: 2, name: "Croissant Keju", price: 15000, icon: "fas fa-stroopwafel", category: "Roti" },
-            { id: 3, name: "Donat Gula", price: 5000, icon: "fas fa-donate", category: "Roti" },
-            { id: 4, name: "Roti Sosis", price: 12000, icon: "fas fa-hotdog", category: "Roti" },
-            { id: 5, name: "Pizza Roti", price: 20000, icon: "fas fa-pizza-slice", category: "Roti" },
-            { id: 6, name: "Roti Tawar", price: 8000, icon: "fas fa-bread-slice", category: "Roti" },
+            { id: 6, name: "Donat Gula", price: 5000, icon: "fas fa-donate", category: "Roti" },
+            { id: 4, name: "Pizza Roti", price: 20000, icon: "fas fa-pizza-slice", category: "Roti" },
+            { id: 1, name: "Roti Coklat", price: 10000, icon: "fas fa-cookie", category: "Roti" },
+            { id: 5, name: "Roti Tawar", price: 8000, icon: "fas fa-bread-slice", category: "Roti" },
             
-            // Kategori Basahan
+            // Kategori Basahan (diurutkan A-Z)
+            { id: 9, name: "Handuk Besar", price: 30000, icon: "fas fa-tshirt", category: "Basahan" },
             { id: 7, name: "Handuk Kecil", price: 15000, icon: "fas fa-tshirt", category: "Basahan" },
-            { id: 8, name: "Handuk Besar", price: 30000, icon: "fas fa-tshirt", category: "Basahan" },
-            { id: 9, name: "Keset", price: 10000, icon: "fas fa-tshirt", category: "Basahan" },
-            { id: 10, name: "Sapu", price: 25000, icon: "fas fa-broom", category: "Basahan" },
+            { id: 10, name: "Keset", price: 10000, icon: "fas fa-tshirt", category: "Basahan" },
+            { id: 8, name: "Sapu", price: 25000, icon: "fas fa-broom", category: "Basahan" },
             
-            // Kategori Coffee
-            { id: 11, name: "Espresso", price: 15000, icon: "fas fa-coffee", category: "Coffee" },
+            // Kategori Coffee (diurutkan A-Z)
             { id: 12, name: "Cappuccino", price: 20000, icon: "fas fa-coffee", category: "Coffee" },
+            { id: 11, name: "Espresso", price: 15000, icon: "fas fa-coffee", category: "Coffee" },
             { id: 13, name: "Latte", price: 22000, icon: "fas fa-coffee", category: "Coffee" },
             { id: 14, name: "Mocha", price: 23000, icon: "fas fa-coffee", category: "Coffee" },
             
-            // Kategori Pemanas
+            // Kategori Pemanas (diurutkan A-Z)
+            { id: 17, name: "Dispenser", price: 500000, icon: "fas fa-fire", category: "Pemanas" },
             { id: 15, name: "Kompor Listrik", price: 250000, icon: "fas fa-fire", category: "Pemanas" },
             { id: 16, name: "Microwave", price: 1200000, icon: "fas fa-fire", category: "Pemanas" },
-            { id: 17, name: "Dispenser", price: 500000, icon: "fas fa-fire", category: "Pemanas" },
             
-            // Kategori Pendingin
-            { id: 18, name: "Kulkas Mini", price: 1500000, icon: "fas fa-snowflake", category: "Pendingin" },
+            // Kategori Pendingin (diurutkan A-Z)
             { id: 19, name: "AC Portable", price: 3000000, icon: "fas fa-snowflake", category: "Pendingin" },
-            { id: 20, name: "Freezer", price: 2500000, icon: "fas fa-snowflake", category: "Pendingin" }
+            { id: 20, name: "Freezer", price: 2500000, icon: "fas fa-snowflake", category: "Pendingin" },
+            { id: 18, name: "Kulkas Mini", price: 1500000, icon: "fas fa-snowflake", category: "Pendingin" },
+            
+            // Kategori Kulkas (diurutkan A-Z) - Kategori baru
+            { id: 21, name: "Kulkas 1 Pintu", price: 1800000, icon: "fas fa-thermometer-full", category: "Kulkas" },
+            { id: 23, name: "Kulkas 3 Pintu", price: 3500000, icon: "fas fa-thermometer-full", category: "Kulkas" },
+            { id: 22, name: "Kulkas 2 Pintu", price: 2800000, icon: "fas fa-thermometer-full", category: "Kulkas" },
+            { id: 24, name: "Kulkas Mini Bar", price: 1200000, icon: "fas fa-thermometer-full", category: "Kulkas" }
         ];
 
         // Keranjang belanja
@@ -746,14 +765,17 @@
             });
         }
         
-        // Render produk berdasarkan kategori
+        // Render produk berdasarkan kategori (dengan urutan abjad)
         function renderProducts() {
             productsGrid.innerHTML = '';
             
             // Filter produk berdasarkan kategori yang aktif
             const filteredProducts = products.filter(product => product.category === currentCategory);
             
-            filteredProducts.forEach(product => {
+            // Urutkan produk berdasarkan nama (A-Z)
+            const sortedProducts = [...filteredProducts].sort((a, b) => a.name.localeCompare(b.name));
+            
+            sortedProducts.forEach(product => {
                 const productCard = document.createElement('div');
                 productCard.className = `product-card product-${product.category.toLowerCase()}`;
                 productCard.innerHTML = `
